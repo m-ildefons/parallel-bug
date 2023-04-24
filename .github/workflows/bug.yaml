@@ -1,0 +1,31 @@
+---
+name: GNU Parallel Bug
+on:
+  push:
+    branch:
+      - '*'
+
+jobs:
+  bug:
+    runs-on: ubuntu-latest
+    steps:
+
+      - name: Bug
+        run: |
+          export FOOBAR=foobar
+          parallel --record-env
+
+          parallel --env _ -j 8 "echo \"$FOOBAR {%}\""
+
+  no-bug:
+    runs-on: ubuntu-latest
+    steps:
+
+      - name: No Bug
+        run: |
+          export PARALLEL_HOME=${GITHUB_WORKSPACE}
+
+          export FOOBAR=foobar
+          parallel --record-env
+
+          parallel --env _ -j 8 "echo \"$FOOBAR {%}\""
