@@ -12,6 +12,8 @@ jobs:
 
       - name: Bug
         run: |
+          parallel --version
+
           export FOOBAR=foobar
           parallel --record-env
 
@@ -23,6 +25,8 @@ jobs:
 
       - name: No Bug
         run: |
+          parallel --version
+
           export PARALLEL_HOME=${GITHUB_WORKSPACE}
 
           export FOOBAR=foobar
